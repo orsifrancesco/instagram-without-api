@@ -1,6 +1,6 @@
 # instagram-without-api, Instagram Scraping in 2021
 
-Just a simple php code to get instagram public pictures by **every user** and by **every tag** without api.
+A simple PHP code to get **unlimited instagram public pictures** by **every user** and by **every tag** without api, just Instagram Scraping in 2021 (with cookie and optional image data in base64).
 
 ## Installation
 
@@ -82,7 +82,7 @@ echo Fetch::fetch([
 ```
 
 ## JSON output
-example on https://github.com/orsifrancesco/instagram-without-api/blob/master/instagram-cache.json
+output example on https://github.com/orsifrancesco/instagram-without-api/blob/master/instagram-cache.json
 
 ```json
 [
