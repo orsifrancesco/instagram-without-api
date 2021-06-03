@@ -1,6 +1,6 @@
-# instagram-without-api
+# instagram-without-api, Instagram Scraping in 2021
 
-Just a simple php code to get instagram public pictures by user or by tag without api.
+Just a simple php code to get instagram public pictures by **every user** and by **every tag** without api.
 
 ## Installation
 
