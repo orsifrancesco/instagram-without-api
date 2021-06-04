@@ -80,6 +80,36 @@ echo Fetch::fetch([
 ?>
 ```
 
+## JSON output
+
+```json
+[
+  {
+    "id": "2696840872190940431",
+    "time": 1635708506,
+    "imageUrl": "https://scontent-lcy1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/249938862_1214260935751176_32...",
+    "likes": 18,
+    "comments": 0,
+    "link": "https://www.instagram.com/p/CVtGnwashUP/",
+    "text": "#helloworld #domain #check",
+    "image": "/9j/4AAQSkZJRgABAQAAAQABAAD/7QB8UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAGA............."
+  },
+  {
+    ...
+  },
+  {
+    "id": "2654027113529608497",
+    "time": 1630604708,
+    "imageUrl": "https://scontent-lcy1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/241221239_8640769...",
+    "likes": 38,
+    "comments": 0,
+    "link": "https://www.instagram.com/p/CTU_5keMAkx/",
+    "text": "#london #uk #unitedkingdom #tube #underground #overground #sunrise #morning #morningvibes #sky #metro #line #prospective",
+    "image": "/9j/4AAQSkZJRgABAQAAAQABAAD/7QB8UGhvdG9zaG9wIDMuMAA4Qkl..........."
+  }
+]
+```
+
 ## License
 
 Licensed under MIT
