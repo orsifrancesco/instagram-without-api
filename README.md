@@ -24,8 +24,8 @@ php test.php
 ![follow this steps](https://user-images.githubusercontent.com/6490641/140643878-d96877a4-b8ac-402d-a977-681f6dda83f4.png "follow this steps")
 
 ## Images Base64
-Although you can get the URLs of the images, Instagram doesn't give you the possibility to include and showing those images on your projects (they will be automatically blocked from their servers).
-You can solve the problem enabling `"base64images" => true` (check the following example). You will get all the URLs and all the images data.
+Although you can get the URLs of the images, Instagram doesn't give you the possibility to include and showing those images on your projects (they will be automatically blocked from their servers).\
+You can solve the problem enabling `"base64images" => true` (check the following example). You will get all the URLs and all the images data.\
 You can easily show the image data on your project with the following snippet of code:
 
 ```html
