@@ -25,11 +25,15 @@ php test.php
 
 ## Images Base64
 Although you can get the URLs of the images, Instagram doesn't give you the possibility to include and showing those images on your projects (they will be automatically blocked from their servers).\
-You can solve the problem enabling `"base64images" => true` (check the following example). You will get all the URLs and all the images data.\
-You can easily show the image data on your project with the following snippet of code:
+You can solve the problem enabling `"base64images" => true` (check the following example).\
+You will get all the URLs and all the images data.\
+You can easily show the image data on your project with the following snippets of code:
 
 ```html
 <img src="data:image/jpg;base64, hereYourBase64String.."/>
+```
+```css
+.example { background-image: url(data:image/jpg;base64, hereYourBase64String..); }
 ```
 
 ## Example
