@@ -10,7 +10,21 @@ composer install
 php test.php
 ```
 
-## Examples
+## How to get Instagram Cookie
+
+A. Login to Instagram
+B. Open your Browser Console (on Windows Chrome just pressing F12)
+1. Select the "Network" tab
+2. Click to the first downloaded resource of the list (normally it will be https://instagram.com/yourusername), if it is empty just refresh the page 
+3. Select "Headers" bar
+4. Scroll down and Copy all the code after the word "cookie"
+5. Paste that string to the "cookie" parameter (as at the following example)
+6. That's it, enjoy :)
+
+![follow this steps](https://user-images.githubusercontent.com/6490641/140643878-d96877a4-b8ac-402d-a977-681f6dda83f4.png "follow this steps")
+
+
+## Example
 
 ```php
 <?php
@@ -35,9 +49,19 @@ echo Fetch::fetch([
 
 ]);
 
-echo Fetch::fetch(["id" => "yourUsername"]); 
+// or
 
-echo Fetch::fetch(["tag" => "yourFavoriteTag"]);
+echo Fetch::fetch([
+  "cookie" => "sameLongStringAsBefore..",
+  "id" => "yourUsername"
+]); 
+
+// or
+
+echo Fetch::fetch([
+  "cookie" => "sameLongStringAsBefore..",
+  "tag" => "yourFavoriteTag"
+]);
 
 ?>
 ```
