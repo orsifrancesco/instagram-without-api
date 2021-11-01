@@ -17,7 +17,7 @@ php test.php
   1. Select the "Network" tab
   2. Click to the first downloaded resource of the list (normally it will be https://instagram.com/yourusername), if it is empty just refresh the page 
   3. Select "Headers" bar
-  4. Scroll down and Copy all the code after the word "cookie"
+  4. Scroll down to "Request Headers" and Copy all the code after the word "cookie"
 - Paste that string to the "cookie" parameter (as at the following example)
 - That's it, enjoy :)
 
@@ -33,8 +33,10 @@ You can easily show the image data on your project with the following snippets o
 <img src="data:image/jpg;base64, hereYourBase64String.."/>
 ```
 ```css
-.example { background-image: url(data:image/jpg;base64, hereYourBase64String..); }
+.example { background-image: url('data:image/jpg;base64, hereYourBase64String..'); }
 ```
+
+Check https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html for an example.
 
 ## Example
 
