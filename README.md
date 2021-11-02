@@ -36,7 +36,7 @@ You can easily show the image data on your project with the following snippets o
 .example { background-image: url('data:image/jpg;base64, hereYourBase64String..'); }
 ```
 
-Check https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html for an example.
+Check https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html for Base64 example.
 
 ## Example
 
