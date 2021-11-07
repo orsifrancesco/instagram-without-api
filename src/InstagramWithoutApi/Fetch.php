@@ -5,12 +5,28 @@ namespace InstagramWithoutApi;
 class Fetch {
 
     public static function fetch($array) {
-	
+
+		@ $maxImages = $array['maxImages'] && is_numeric($array['maxImages']) && $array['maxImages'] <= 12 ? $array['maxImages'] : false;
+		@ $cookie = $array['cookie'] ? $array['cookie'] : false;
+		@ $base64images = is_bool($array['base64images']) ? $array['base64images'] : true;
 		@ $file = $array['file'] ? $array['file'] : 'instagram-cache.json';
 		@ $time = isset($array['time']) ? $array['time'] : 3600;
 		@ $prettyfy = ($array['pretty']) ? JSON_PRETTY_PRINT : false;
 		@ $instagramId = $array['id'];
 		@ $instagramTag = $array['tag'];
+
+		function magicCurl($instagramUrl, $cookie) {
+	
+			$ch = curl_init($instagramUrl);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_HEADER, 1);
+			curl_setopt($ch, CURLOPT_COOKIE, $cookie);
+			$content = curl_exec($ch);
+			curl_close($ch);
+			
+			return $content;
+			
+		}
 		
 		if(
 			!isset($file) ||
@@ -24,7 +40,7 @@ class Fetch {
 			
 			if(isset($instagramTag) && $instagramTag != '') { $instagramUrl = 'https://www.instagram.com/explore/tags/' . $instagramTag . '/?hl=en'; }
 
-			$content = file_get_contents($instagramUrl);
+			$content = magicCurl($instagramUrl, $cookie);
 
 			$page = explode('<script type="text/javascript">window._sharedData =',$content);
 			$page = $page[1];
@@ -71,17 +87,24 @@ class Fetch {
 
 					$temp = array();
 
-					for($i = 0; $i < count($pageDecoded); $i++) {
+					$counter = count($pageDecoded);
+					if($maxImages) $counter = $maxImages;
+
+					for($i = 0; $i < $counter; $i++) {
 						
-						$temp[] = array(
+						$newResult = array(
 							'id' => @ $pageDecoded[$i]['node']['id'],
 							'time' => @ $pageDecoded[$i]['node']['taken_at_timestamp'],
-							'image' => @ $pageDecoded[$i]['node']['display_url'],
+							'imageUrl' => @ $pageDecoded[$i]['node']['display_url'],
 							'likes' => @ $pageDecoded[$i]['node']['edge_liked_by']['count'],
 							'comments' => @ $pageDecoded[$i]['node']['edge_media_to_comment']['count'],
 							'link' => @ 'https://www.instagram.com/p/' . $pageDecoded[$i]['node']['shortcode'] . '/',
 							'text' => @ $pageDecoded[$i]['node']['edge_media_to_caption']['edges'][0]['node']['text'],
 						);
+
+						if($base64images) $newResult['image'] = base64_encode(file_get_contents(@  $pageDecoded[$i]['node']['display_url']));
+
+						$temp[] = $newResult;
 						
 					}
 					
