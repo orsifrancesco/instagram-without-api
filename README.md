@@ -1,6 +1,6 @@
-# instagram-without-api, Instagram Scraping in 2021
+# instagram-without-api, Instagram Scraping in 2021, no credentials required
 
-A simple PHP code to get **unlimited instagram public pictures** by **every user** and by **every tag** without api, just Instagram Scraping in 2021 (with cookie and optional image data in base64).
+A simple PHP code to get **unlimited instagram public pictures** by **every user** and by **every tag** without api, **without credentials** (just token from cookies), just Instagram Scraping in 2021 (with cookie and optional image data in base64).
 
 ## Installation
 
