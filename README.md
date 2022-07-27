@@ -1,6 +1,6 @@
-# instagram-without-api, Instagram Scraping in 2021, no credentials required
+# instagram-without-api, Instagram Scraping in August 2022, no credentials required
 
-A simple PHP code to get **unlimited instagram public pictures** by **every user** and by **every tag** without api, **without credentials** (just token from cookies), just Instagram Scraping in 2021 (with cookie and optional image data in base64).
+A simple PHP code to get **unlimited instagram public pictures** by **every user** without api, **without credentials** (just token from cookies), just Instagram Scraping in 2022 (with cookie and image data in base64).
 
 ## Installation
 
@@ -25,8 +25,7 @@ php test.php
 
 ## Images Base64
 Although you can get the URLs of the images, Instagram doesn't give you the possibility to include and showing those images on your projects (they will be automatically blocked from their servers).\
-You can solve the problem enabling `"base64images" => true` (check the following example).\
-You will get all the URLs and all the images data.\
+To solve this problem you will get all the URLs and all the images data in base64.\
 You can easily show the image data on your project with the following snippets of code:
 
 ```html
@@ -50,17 +49,33 @@ use InstagramWithoutApi\Fetch;
 
 echo Fetch::fetch([
 
-  "cookie" =>                         // <!-- required!! please get your cookie from your browser console
-  'somethingSuperLongLikeThis=fromYourBrowserConsole; csrftoken=1234xcj5; fbm_124024574287414=base_domain=.instagram.com; shbid="12383\0543952162074\054166446......."',
+  "header" =>                         // <!-- required!! please get your cookie from your browser console
+		"accept: */*\r\n" .
+		"accept-language: en-GB,en;q=0.9\r\n" .
+		"cache-control: no-cache\r\n" .
+		'cookie: 76d998fc6e27ab131b389988eb51b537..........db15b12cf7952"\r\n' .
+		"dnt: 1\r\n" .
+		"origin: https://www.instagram.com\r\n" .
+		"pragma: no-cache\r\n" .
+		"referer: https://www.instagram.com/\r\n" .
+		'sec-ch-ua: ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"\r\n' .
+		"sec-ch-ua-mobile: ?0\r\n" .
+		'sec-ch-ua-platform: "Windows"\r\n' .
+		"sec-fetch-dest: empty\r\n" .
+		"sec-fetch-mode: cors\r\n" .
+		"sec-fetch-site: same-site\r\n" .
+		"user-agent: Mozilla/5.0 (Windows NT 10...........me/103.0.0.0 Safari/537.36\r\n" .
+		"x-asbd-id: 198387\r\n" .
+		"x-csrftoken: 4kvO.........qWLPyMz7sd5r2\r\n" .
+		"x-ig-app-id: 936619743392459\r\n" .
+		"x-ig-www-claim: hmAcPXDmhdpYA1\r\n",
 
   "maxImages" => 2,                   // <!-- optional, 12 is the max number
-  "base64images" => true,             // <!-- optional, false is by default, includes images base64 in the json output, it is pretty heavy
   "file" => "instagram-cache.json",   // <!-- optional, instagram-cache.json is by default
   "time" => 3600,                     // <!-- optional, reload contents after 3600 seconds by default
   "pretty" => true,                   // <!-- optional, prettyfy json true/false
 
-  "id" => "orsifrancesco",            // <!-- id or tag is required
-  //"tag" => "landscape"              // <!-- id or tag is required
+  "id" => "orsifrancesco",            // <!-- id is required
 
 ]);
 
@@ -70,13 +85,6 @@ echo Fetch::fetch([
   "cookie" => "sameLongStringAsBefore..",
   "id" => "yourUsername"
 ]); 
-
-// or
-
-echo Fetch::fetch([
-  "cookie" => "sameLongStringAsBefore..",
-  "tag" => "yourFavoriteTag"
-]);
 
 ?>
 ```
