@@ -15,13 +15,16 @@ php test.php
 - Login to Instagram
 - Open your Browser Console (on Windows Chrome just pressing F12)
   1. Select the "Network" tab
-  2. Click to the first downloaded resource of the list (normally it will be https://instagram.com/yourusername), if it is empty just refresh the page 
+  2. Search and click on "timeline/" file; if it is empty just refresh the page
   3. Select "Headers" bar
-  4. Scroll down to "Request Headers" and Copy all the code after the word "cookie"
-- Paste that string to the "cookie" parameter (as at the following example)
+  4. Be sure the file is Request Method "POST" (if it is "OPTIONS" search the other "timeline/" file in the list)
+  5. Scroll down and select "Request Headers" tab
+  6. Copy all the code after the word "cookie: " and paste it on `$cookie` variable
+  7. Copy all the code after the word "user-agent: " and paste it on `$userAgent` variable
+  8. Copy all the code after the word "x-ig-app-id: " and paste it on `$xIgAppId` variable
 - That's it, enjoy :)
 
-![follow this steps](https://user-images.githubusercontent.com/6490641/140643878-d96877a4-b8ac-402d-a977-681f6dda83f4.png "follow this steps")
+![follow this steps](https://user-images.githubusercontent.com/6490641/181632823-42fb2308-4c3f-421a-848a-58cefcf98915.png "follow this steps")
 
 ## Images Base64
 Although you can get the URLs of the images, Instagram doesn't give you the possibility to include and showing those images on your projects (they will be automatically blocked from their servers).\
@@ -47,35 +50,24 @@ require_once __DIR__ . '/vendor/autoload.php';  // Autoload files using Composer
 
 use InstagramWithoutApi\Fetch;
 
+$cookie = 'mid=YYcwjgAL....8765"';              // <!-- required!! please get your cookie from your browser console (6)
+$userAgent = 'Mozilla/5.0...Chrome/537.36';     // <!-- required!! please get your user-agent from your browser console (7)
+$xIgAppId = '9366197...';                       // <!-- required!! please get your x-ig-app-id from your browser console (8)
+
 echo Fetch::fetch([
 
-  "header" =>                         // <!-- required!! please get your cookie from your browser console
-		"accept: */*\r\n" .
-		"accept-language: en-GB,en;q=0.9\r\n" .
-		"cache-control: no-cache\r\n" .
-		'cookie: 76d998fc6e27ab131b389988eb51b537..........db15b12cf7952"\r\n' .
-		"dnt: 1\r\n" .
-		"origin: https://www.instagram.com\r\n" .
-		"pragma: no-cache\r\n" .
-		"referer: https://www.instagram.com/\r\n" .
-		'sec-ch-ua: ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"\r\n' .
-		"sec-ch-ua-mobile: ?0\r\n" .
-		'sec-ch-ua-platform: "Windows"\r\n' .
-		"sec-fetch-dest: empty\r\n" .
-		"sec-fetch-mode: cors\r\n" .
-		"sec-fetch-site: same-site\r\n" .
-		"user-agent: Mozilla/5.0 (Windows NT 10...........me/103.0.0.0 Safari/537.36\r\n" .
-		"x-asbd-id: 198387\r\n" .
-		"x-csrftoken: 4kvO.........qWLPyMz7sd5r2\r\n" .
-		"x-ig-app-id: 936619743392459\r\n" .
-		"x-ig-www-claim: hmAcPXDmhdpYA1\r\n",
+  "header" =>                                   
+    'cookie: ' . $cookie . "\r\n" .
+    'user-agent: ' . $userAgent . "\r\n" .
+    'x-ig-app-id: ' . $xIgAppId . "\r\n" .
+    '',
 
-  "maxImages" => 2,                   // <!-- optional, 12 is the max number
-  "file" => "instagram-cache.json",   // <!-- optional, instagram-cache.json is by default
-  "time" => 3600,                     // <!-- optional, reload contents after 3600 seconds by default
-  "pretty" => true,                   // <!-- optional, prettyfy json true/false
+  "maxImages" => 2,                             // <!-- optional, 12 is the max number
+  "file" => "instagram-cache.json",             // <!-- optional, instagram-cache.json is by default
+  "time" => 3600,                               // <!-- optional, reload contents after 3600 seconds by default
+  "pretty" => true,                             // <!-- optional, prettyfy json true/false
 
-  "id" => "orsifrancesco",            // <!-- id is required
+  "id" => "orsifrancesco",                      // <!-- id is required
 
 ]);
 
