@@ -23,7 +23,9 @@ php test.php
   6. Copy all the code after the word "cookie: " and paste it on `$cookie` variable
   7. Copy all the code after the word "user-agent: " and paste it on `$userAgent` variable
   8. Copy all the code after the word "x-ig-app-id: " and paste it on `$xIgAppId` variable
-- <div style="color: red">don't share your cookie code with anyone!!! it is the same of your credentials</div>
+```diff
+- don't share your cookie code with anyone!!! it is the same of your credentials
+```
 - That's it, enjoy :)
 
 ![follow this steps](https://user-images.githubusercontent.com/6490641/181632823-42fb2308-4c3f-421a-848a-58cefcf98915.png "follow this steps")
