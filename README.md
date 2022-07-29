@@ -13,7 +13,8 @@ php test.php
 ## How to get Instagram Cookie
 
 - Login to Instagram
-- Open your Browser Console (on Windows Chrome just pressing F12)
+- Go to your https://instagram/yourUsername
+- Open your Browser Console (on Chrome just pressing F12)
   1. Select the "Network" tab
   2. Search and click on "timeline/" file; if it is empty just refresh the page
   3. Select "Headers" bar
@@ -22,6 +23,7 @@ php test.php
   6. Copy all the code after the word "cookie: " and paste it on `$cookie` variable
   7. Copy all the code after the word "user-agent: " and paste it on `$userAgent` variable
   8. Copy all the code after the word "x-ig-app-id: " and paste it on `$xIgAppId` variable
+- <div style="color: red">don't share your cookie code with anyone!!! it is the same of your credentials</div>
 - That's it, enjoy :)
 
 ![follow this steps](https://user-images.githubusercontent.com/6490641/181632823-42fb2308-4c3f-421a-848a-58cefcf98915.png "follow this steps")
