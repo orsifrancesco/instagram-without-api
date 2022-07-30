@@ -75,13 +75,6 @@ echo Fetch::fetch([
 
 ]);
 
-// or
-
-echo Fetch::fetch([
-  "cookie" => "sameLongStringAsBefore..",
-  "id" => "yourUsername"
-]); 
-
 ?>
 ```
 
