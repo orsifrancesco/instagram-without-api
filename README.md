@@ -1,4 +1,6 @@
-# instagram-without-api, Instagram Scraping in August 2022, no credentials required
+This is a PHP library, are you looking for the same in Node.js? go to https://github.com/orsifrancesco/instagram-without-api-node.
+
+# Instagram Scraping in August 2022, no credentials required
 
 A simple PHP code to get **unlimited instagram public pictures** by **every user** without api, **without credentials** (just token from cookies), just Instagram Scraping in 2022 (with cookie and image data in base64).
 
@@ -6,6 +8,9 @@ A simple PHP code to get **unlimited instagram public pictures** by **every user
 
 ```bash
 composer install
+
+# download the file https://github.com/orsifrancesco/instagram-without-api/blob/master/test.php
+# add your cookie, user-agent and x-ig-app-id following the next step "How to get Instagram Cookie"
 
 php test.php
 ```
