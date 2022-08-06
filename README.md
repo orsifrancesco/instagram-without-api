@@ -83,58 +83,58 @@ $xIgAppId = '9366197...';                       // <!-- required!! please get yo
 
 echo Fetch::fetch([
 
-	"header" =>                                   
-		'cookie: ' . $cookie . "\r\n" .
-		'user-agent: ' . $userAgent . "\r\n" .
-		'x-ig-app-id: ' . $xIgAppId . "\r\n" .
-		'',
+  "header" =>                                   
+    'cookie: ' . $cookie . "\r\n" .
+    'user-agent: ' . $userAgent . "\r\n" .
+    'x-ig-app-id: ' . $xIgAppId . "\r\n" .
+    '',
 
-	"maxImages" => 4,							// <!-- optional, 12 is the max number
-	"file" => "instagram-cache.json",			// <!-- optional, instagram-cache.json is by default
-	"time" => 3600,								// <!-- optional, reload contents after 3600 seconds by default
-	"pretty" => true,							// <!-- optional, prettyfy json true/false
+  "maxImages" => 4,                           // <!-- optional, 12 is the max number
+  "file" => "instagram-cache.json",           // <!-- optional, instagram-cache.json is by default
+  "time" => 3600,                             // <!-- optional, reload contents after 3600 seconds by default
+  "pretty" => true,                           // <!-- optional, prettyfy json true/false
 
-	"id" => "orsifrancesco",					// <!-- id is required
+  "id" => "orsifrancesco",                    // <!-- id is required
 
 ]);
 
 
 
-// get picture and info from instagram id url (example https://www.instagram.com/p/CgYt1Y-sXGS/)
+// get picture and info from instagram id url (example https://www.instagram.com/p/Cgczi6qMuh1/)
 
 echo Fetch::fetchByIdUrl([
 
-	"header" =>                                   
-		'cookie: ' . $cookie . "\r\n" .
-		'user-agent: ' . $userAgent . "\r\n" .
-		'x-ig-app-id: ' . $xIgAppId . "\r\n" .
-		'',
+  "header" =>                                   
+    'cookie: ' . $cookie . "\r\n" .
+    'user-agent: ' . $userAgent . "\r\n" .
+    'x-ig-app-id: ' . $xIgAppId . "\r\n" .
+    '',
 
-	"file" => "instagram-cache-byidurl.json",	// <!-- optional, instagram-cache-byidurl-{id}.json is by default
-	"time" => 3600,								// <!-- optional, reload contents after 3600 seconds by default
-	"pretty" => true,							// <!-- optional, prettyfy json true/false
+  "file" => "instagram-cache-byidurl.json",   // <!-- optional, instagram-cache-byidurl-{id}.json is by default
+  "time" => 3600,                             // <!-- optional, reload contents after 3600 seconds by default
+  "pretty" => true,                           // <!-- optional, prettyfy json true/false
 
-	"id" => "CgYt1Y-sXGS",						// <!-- id is required
+  "id" => "Cgczi6qMuh1",                      // <!-- id is required
 
 ]);
 
 
 
-// get picture and info from instagram id (2898553675947377985 is the id of https://www.instagram.com/p/CgYt1Y-sXGS/)
+// get picture and info from instagram id (2898553675947377985 is the id of https://www.instagram.com/p/Cgczi6qMuh1/)
 
 echo Fetch::fetchById([
 
-	"header" =>                                   
-		'cookie: ' . $cookie . "\r\n" .
-		'user-agent: ' . $userAgent . "\r\n" .
-		'x-ig-app-id: ' . $xIgAppId . "\r\n" .
-		'',
+  "header" =>                                   
+    'cookie: ' . $cookie . "\r\n" .
+    'user-agent: ' . $userAgent . "\r\n" .
+    'x-ig-app-id: ' . $xIgAppId . "\r\n" .
+    '',
 
-	"file" => "instagram-cache-byid.json",		// <!-- optional, instagram-cache-byid-{id}.json is by default
-	"time" => 3600,								// <!-- optional, reload contents after 3600 seconds by default
-	"pretty" => true,							// <!-- optional, prettyfy json true/false
+  "file" => "instagram-cache-byid.json",    // <!-- optional, instagram-cache-byid-{id}.json is by default
+  "time" => 3600,                           // <!-- optional, reload contents after 3600 seconds by default
+  "pretty" => true,                         // <!-- optional, prettyfy json true/false
 
-	"id" => "2898553675947377985",				// <!-- id is required
+  "id" => "2890411760684296309",            // <!-- id is required
 
 ]);
 
@@ -194,7 +194,7 @@ output example for `Fetch::fetchByIdUrl` or `Fetch::fetchById`
         }
       }
     ],
-    "link": "https:\/\/www.instagram.com\/p\/CgYt1Y-sXGS\/",
+    "link": "https:\/\/www.instagram.com\/p\/Cgczi6qMuh1\/",
     "text": "If you know it, you know it...",
     "user": {
       "username": "orsifrancesco",
