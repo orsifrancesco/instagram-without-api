@@ -16,9 +16,9 @@ A simple PHP code to get **unlimited instagram public pictures** by **every user
 ### ☕ [Offer me a coffee](https://www.paypal.com/donate/?business=5EL4L2LDYVH96)
 <!--### ☕ [Offer me a coffee](https://paypal.me/orsifrancesco)-->
 
-<br/><hr/><br/>
+<hr/>
 
-## Installation
+## Installation 📦
 
 ```bash
 composer install
@@ -29,7 +29,7 @@ composer install
 php test.php
 ```
 
-## How to get Instagram Cookie
+## How to get Instagram Cookie 🍪
 
 - Login to Instagram
 - Go to your https://instagram/yourUsername
@@ -49,7 +49,7 @@ php test.php
 
 ![follow this steps](https://user-images.githubusercontent.com/6490641/181632823-42fb2308-4c3f-421a-848a-58cefcf98915.png "follow this steps")
 
-## Images Base64
+## Images Base64 💻
 Although you can get the URLs of the images, Instagram doesn't give you the possibility to include and showing those images on your projects (they will be automatically blocked from their servers).\
 To solve this problem you will get all the URLs and all the images data in base64.\
 You can easily show the image data on your project with the following snippets of code:
@@ -141,7 +141,7 @@ echo Fetch::fetchById([
 ?>
 ```
 
-## JSON outputs
+## JSON outputs 🕹️
 output example for `Fetch::fetch` on https://github.com/orsifrancesco/instagram-without-api/blob/master/instagram-cache.json
 
 ```json
