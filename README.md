@@ -1,8 +1,8 @@
 <p align="center">
   <img src="https://user-images.githubusercontent.com/6490641/182688224-3730f63d-0428-49d6-a909-5a31fc3a38b9.png" width="128" height="128" alt="instagram-without-api" />
 </p>
-<h1 align="center">Instagram Without APIs</h1>
-<h2 align="center">Instagram Scraping in August 2022, no credentials required</h2>
+<h2 align="center">Instagram Without APIs</h2>
+<h3 align="center">Instagram Scraping in August 2022, no credentials required</h3>
 
 <br/>
 
@@ -10,11 +10,11 @@ This is a PHP library, are you looking for the same in Node.js? go to https://or
 
 A simple PHP code to get **unlimited instagram public pictures** by **every user** without api, **without credentials** (just token from cookies), just Instagram Scraping in 2022 (with cookie and image data in base64).
 
-<br/>
-
 ### [🎮 Demo / Example](https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html)
 ### ⚖️ Licensed under MIT
 ### 🤓 [@orsifrancesco](https://twitter.com/orsifrancesco)
+### ☕ [Offer me a coffee](https://www.paypal.com/donate/?business=5EL4L2LDYVH96)
+<!--### ☕ [Offer me a coffee](https://paypal.me/orsifrancesco)-->
 
 <br/><hr/><br/>
 
@@ -63,7 +63,7 @@ You can easily show the image data on your project with the following snippets o
 
 Check https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html for Base64 example.
 
-## Demo / Example
+## Demo / Example 🎮
 example on https://github.com/orsifrancesco/instagram-without-api/blob/master/test.php
 
 ```php
@@ -77,28 +77,72 @@ $cookie = 'mid=YYcwjgAL....8765"';              // <!-- required!! please get yo
 $userAgent = 'Mozilla/5.0...Chrome/537.36';     // <!-- required!! please get your user-agent from your browser console (7)
 $xIgAppId = '9366197...';                       // <!-- required!! please get your x-ig-app-id from your browser console (8)
 
+
+
+// get the latest 12 feeds from an account (example https://www.instagram.com/orsifrancesco/)
+
 echo Fetch::fetch([
 
-  "header" =>                                   
-    'cookie: ' . $cookie . "\r\n" .
-    'user-agent: ' . $userAgent . "\r\n" .
-    'x-ig-app-id: ' . $xIgAppId . "\r\n" .
-    '',
+	"header" =>                                   
+		'cookie: ' . $cookie . "\r\n" .
+		'user-agent: ' . $userAgent . "\r\n" .
+		'x-ig-app-id: ' . $xIgAppId . "\r\n" .
+		'',
 
-  "maxImages" => 2,                             // <!-- optional, 12 is the max number
-  "file" => "instagram-cache.json",             // <!-- optional, instagram-cache.json is by default
-  "time" => 3600,                               // <!-- optional, reload contents after 3600 seconds by default
-  "pretty" => true,                             // <!-- optional, prettyfy json true/false
+	"maxImages" => 4,							// <!-- optional, 12 is the max number
+	"file" => "instagram-cache.json",			// <!-- optional, instagram-cache.json is by default
+	"time" => 3600,								// <!-- optional, reload contents after 3600 seconds by default
+	"pretty" => true,							// <!-- optional, prettyfy json true/false
 
-  "id" => "orsifrancesco",                      // <!-- id is required
+	"id" => "orsifrancesco",					// <!-- id is required
+
+]);
+
+
+
+// get picture and info from instagram id url (example https://www.instagram.com/p/CgYt1Y-sXGS/)
+
+echo Fetch::fetchByIdUrl([
+
+	"header" =>                                   
+		'cookie: ' . $cookie . "\r\n" .
+		'user-agent: ' . $userAgent . "\r\n" .
+		'x-ig-app-id: ' . $xIgAppId . "\r\n" .
+		'',
+
+	"file" => "instagram-cache-byidurl.json",	// <!-- optional, instagram-cache-byidurl-{id}.json is by default
+	"time" => 3600,								// <!-- optional, reload contents after 3600 seconds by default
+	"pretty" => true,							// <!-- optional, prettyfy json true/false
+
+	"id" => "CgYt1Y-sXGS",						// <!-- id is required
+
+]);
+
+
+
+// get picture and info from instagram id (2898553675947377985 is the id of https://www.instagram.com/p/CgYt1Y-sXGS/)
+
+echo Fetch::fetchById([
+
+	"header" =>                                   
+		'cookie: ' . $cookie . "\r\n" .
+		'user-agent: ' . $userAgent . "\r\n" .
+		'x-ig-app-id: ' . $xIgAppId . "\r\n" .
+		'',
+
+	"file" => "instagram-cache-byid.json",		// <!-- optional, instagram-cache-byid-{id}.json is by default
+	"time" => 3600,								// <!-- optional, reload contents after 3600 seconds by default
+	"pretty" => true,							// <!-- optional, prettyfy json true/false
+
+	"id" => "2898553675947377985",				// <!-- id is required
 
 ]);
 
 ?>
 ```
 
-## JSON output
-output example on https://github.com/orsifrancesco/instagram-without-api/blob/master/instagram-cache.json
+## JSON outputs
+output example for `Fetch::fetch` on https://github.com/orsifrancesco/instagram-without-api/blob/master/instagram-cache.json
 
 ```json
 [
@@ -125,6 +169,48 @@ output example on https://github.com/orsifrancesco/instagram-without-api/blob/ma
 ]
 ```
 
-## License
+output example for `Fetch::fetchByIdUrl` or `Fetch::fetchById`
+```json
+[
+  {
+    "id": "289855367...",
+    "width": 1385,
+    "height": 1731,
+    "imageUrl": "https:\/\/scontent-lhr8-1.cdnin...",
+    "time": 1659754546,
+    "topLikers": [
+        "franko"
+    ],
+    "likes": 32,
+    "commentCount": 2,
+    "comments": [
+      {
+        "time": 1659756069,
+        "text": "This is a comment...",
+        "user": {
+          "username": "test",
+          "fullName": "DearTest",
+          "imageUrl": "https:\/\/scontent-lhr8-1.cdninstagram.com..."
+        }
+      }
+    ],
+    "link": "https:\/\/www.instagram.com\/p\/CgYt1Y-sXGS\/",
+    "text": "If you know it, you know it...",
+    "user": {
+      "username": "orsifrancesco",
+      "fullName": "Frank",
+      "imageUrl": "https:\/\/scontent-lhr8-1.cd..."
+    },
+    "image": "\/9j\/4AAQSkZJR....Q=="
+  }
+]
+```
+
+## License ⚖️
 
 Licensed under MIT
+
+
+## About ☕
+
+Any feedback to [@orsifrancesco](https://twitter.com/orsifrancesco) and/or [coffee](https://www.paypal.com/donate/?business=5EL4L2LDYVH96) is welcome :) 
