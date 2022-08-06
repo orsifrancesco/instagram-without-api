@@ -10,15 +10,17 @@ This is a PHP library, are you looking for the same in Node.js? go to https://or
 
 A simple PHP code to get **unlimited instagram public pictures** by **every user** without api, **without credentials** (just token from cookies), just Instagram Scraping in 2022 (with cookie and image data in base64).
 
+You can get the latest pictures/information from an account or a single picture/information by id.
+
 ### [🎮 Demo / Example](https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html)
 ### ⚖️ Licensed under MIT
-### 🤓 [@orsifrancesco](https://twitter.com/orsifrancesco)
+### 🤓 Author [@orsifrancesco](https://twitter.com/orsifrancesco)
 ### ☕ [Offer me a coffee](https://www.paypal.com/donate/?business=5EL4L2LDYVH96)
 <!--### ☕ [Offer me a coffee](https://paypal.me/orsifrancesco)-->
 
 <hr/>
 
-## Installation 📦
+## 📦 Installation
 
 ```bash
 composer install
@@ -29,7 +31,7 @@ composer install
 php test.php
 ```
 
-## How to get Instagram Cookie 🍪
+## 🍪 How to get Instagram Cookie
 
 - Login to Instagram
 - Go to your https://instagram/yourUsername
@@ -49,7 +51,7 @@ php test.php
 
 ![follow this steps](https://user-images.githubusercontent.com/6490641/181632823-42fb2308-4c3f-421a-848a-58cefcf98915.png "follow this steps")
 
-## Images Base64 💻
+## 💻 Images Base64
 Although you can get the URLs of the images, Instagram doesn't give you the possibility to include and showing those images on your projects (they will be automatically blocked from their servers).\
 To solve this problem you will get all the URLs and all the images data in base64.\
 You can easily show the image data on your project with the following snippets of code:
@@ -63,7 +65,7 @@ You can easily show the image data on your project with the following snippets o
 
 Check https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html for Base64 example.
 
-## Demo / Example 🎮
+## 🎮 Demo / Example
 example on https://github.com/orsifrancesco/instagram-without-api/blob/master/test.php
 
 ```php
@@ -79,7 +81,7 @@ $xIgAppId = '9366197...';                       // <!-- required!! please get yo
 
 
 
-// get the latest 12 feeds from an account (example https://www.instagram.com/orsifrancesco/)
+// get the latest 12 pictures from an account (example https://www.instagram.com/orsifrancesco/)
 
 echo Fetch::fetch([
 
@@ -141,7 +143,7 @@ echo Fetch::fetchById([
 ?>
 ```
 
-## JSON outputs 🕹️
+## 🕹️ JSON outputs
 output example for `Fetch::fetch` on https://github.com/orsifrancesco/instagram-without-api/blob/master/instagram-cache.json
 
 ```json
@@ -206,11 +208,11 @@ output example for `Fetch::fetchByIdUrl` or `Fetch::fetchById`
 ]
 ```
 
-## License ⚖️
+## ⚖️ License
 
 Licensed under MIT
 
 
-## About ☕
+## ☕ About
 
 Any feedback to [@orsifrancesco](https://twitter.com/orsifrancesco) and/or [coffee](https://www.paypal.com/donate/?business=5EL4L2LDYVH96) is welcome :) 
