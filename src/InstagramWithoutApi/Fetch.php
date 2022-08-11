@@ -256,7 +256,19 @@ class Fetch {
 							);
 
 							if($base64images) $newResult['image'] = base64_encode(file_get_contents(@  $items[$i]['node']['display_url']));
-
+							if(@ $items[$i]['node']['edge_sidecar_to_children']){
+								$total_sidecars = count(@ $items[$i]['node']['edge_sidecar_to_children']['edges']);
+								// start index @ 1 because 0 is the first image - aka imageUrl above.
+								for($ii = 1; $ii < $total_sidecars; $ii++){
+									if($items[$i]['node']['edge_sidecar_to_children']['edges'][$ii]['node']['__typename'] == 'GraphImage' 
+										&& $items[$i]['node']['edge_sidecar_to_children']['edges'][$ii]['node']['display_url']){
+										$newResult['morePics'][] = [
+											'imageUrl' => @ $items[$i]['node']['edge_sidecar_to_children']['edges'][$ii]['node']['display_url'],
+											'image' => $base64images ? base64_encode(file_get_contents(@ $items[$i]['node']['edge_sidecar_to_children']['edges'][$ii]['node']['display_url'])) : ''
+										];
+									}
+								}
+							}
 							$temp[] = $newResult;
 							
 						}
