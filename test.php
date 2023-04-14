@@ -12,9 +12,13 @@ $xIgAppId = '9366197...';                       // <!-- required!! please get yo
 
 
 
-// get the latest 12 feeds from an account (example https://www.instagram.com/orsifrancesco/)
+// get the latest 12 feeds from a tag (example https://instagram.com/explore/tags/love)
 
-$fetch = Fetch::fetch([
+$fetch = Fetch::fetchByTag([
+
+	"group" => 'recent',						// <!-- "recent" images or "top" images; "recent" is by default 
+	"base64images" => true,						// <!-- optional, but without you will be not able to save images.. it increases the size of the json file
+	"base64videos" => false,					// <!-- optional but not recommended, it increases the size of the json file
 
 	"header" =>                                   
 		'cookie: ' . $cookie . "\r\n" .
@@ -26,7 +30,29 @@ $fetch = Fetch::fetch([
 	"file" => "instagram-cache.json",			// <!-- optional, instagram-cache.json is by default
 	"time" => 3600,								// <!-- optional, reload contents after 3600 seconds by default
 	"pretty" => true,							// <!-- optional, prettyfy json true/false
+	"id" => "love",								// <!-- id is required
 
+]);
+
+
+
+// get the latest 12 feeds from an account (example https://www.instagram.com/orsifrancesco/)
+
+$fetch = Fetch::fetch([
+
+	"base64images" => true,						// <!-- optional, but without you will be not able to save images.. it increases the size of the json file
+	"base64videos" => false,					// <!-- optional but not recommended, it increases the size of the json file
+
+	"header" =>                                   
+		'cookie: ' . $cookie . "\r\n" .
+		'user-agent: ' . $userAgent . "\r\n" .
+		'x-ig-app-id: ' . $xIgAppId . "\r\n" .
+		'',
+
+	"maxImages" => 4,							// <!-- optional, 12 is the max number
+	"file" => "instagram-cache.json",			// <!-- optional, instagram-cache.json is by default
+	"time" => 3600,								// <!-- optional, reload contents after 3600 seconds by default
+	"pretty" => true,							// <!-- optional, prettyfy json true/false
 	"id" => "orsifrancesco",					// <!-- id is required
 
 ]);
@@ -56,6 +82,9 @@ $fetchByIdUrl = Fetch::fetchByIdUrl([
 // get picture and info from instagram id (2890411760684296309 is the id of https://www.instagram.com/p/Cgczi6qMuh1/)
 
 $fetchById = Fetch::fetchById([
+
+	"base64images" => true,						// <!-- optional, but without you will be not able to save images.. it increases the size of the json file
+	"base64videos" => false,					// <!-- optional but not recommended, it increases the size of the json file
 
 	"header" =>                                   
 		'cookie: ' . $cookie . "\r\n" .

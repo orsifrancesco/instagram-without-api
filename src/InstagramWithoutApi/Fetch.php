@@ -42,7 +42,9 @@ class Fetch {
 		@ $instagramId = $array['id'];
 		if(!isset($instagramId) || $instagramId == '') { $instagramId = '2890411760684296309'; }
 
-		$base64images = true;
+		@ $base64images = $array['base64images'] ? $array['base64images'] : false;
+		@ $base64videos = $array['base64videos'] ? $array['base64videos'] : false;
+
 		@ $header = $array['header'] ? $array['header'] : false;
 		@ $file = $array['file'] ? $array['file'] : 'instagram-cache-byid-' . $instagramId . '.json';
 		@ $time = isset($array['time']) ? $array['time'] : 3600;
@@ -199,7 +201,9 @@ class Fetch {
 
     public static function fetch($array) {
 
-		$base64images = true;
+		@ $base64images = $array['base64images'] ? $array['base64images'] : false;
+		@ $base64videos = $array['base64videos'] ? $array['base64videos'] : false;
+
 		@ $maxImages = $array['maxImages'] && is_numeric($array['maxImages']) && $array['maxImages'] <= 12 ? $array['maxImages'] : false;
 		@ $header = $array['header'] ? $array['header'] : false;
 		@ $file = $array['file'] ? $array['file'] : 'instagram-cache.json';
@@ -215,7 +219,8 @@ class Fetch {
 
 			if(!isset($instagramId) || $instagramId == '') { $instagramId = 'orsifrancesco'; }
 
-			$instagramUrl = 'https://i.instagram.com/api/v1/users/web_profile_info/?username=' . $instagramId;
+//			$instagramUrl = 'https://i.instagram.com/api/v1/users/web_profile_info/?username=' . $instagramId;
+			$instagramUrl = 'https://www.instagram.com/api/v1/users/web_profile_info/?username=' . $instagramId;
 
 			$content = self::magicCurl($instagramUrl, $header);
 
@@ -243,21 +248,54 @@ class Fetch {
 						$counter = count($items);
 						if($maxImages) $counter = $maxImages;
 
+						$imageUrl = false;
+
 						for($i = 0; $i < $counter; $i++) {
+
+							$imageUrl = @ $items[$i]['node']['display_url'];
 							
 							$newResult = array(
 								'id' => @ $items[$i]['node']['id'],
 								'time' => @ $items[$i]['node']['taken_at_timestamp'],
-								'imageUrl' => @ $items[$i]['node']['display_url'],
+								'imageUrl' => $imageUrl,
 								'likes' => @ $items[$i]['node']['edge_liked_by']['count'],
 								'comments' => @ $items[$i]['node']['edge_media_to_comment']['count'],
 								'link' => @ 'https://www.instagram.com/p/' . $items[$i]['node']['shortcode'] . '/',
 								'text' => @ $items[$i]['node']['edge_media_to_caption']['edges'][0]['node']['text'],
 							);
 
+							if(
+								@ $items[$i]['node']['location'] &&
+								@ $items[$i]['node']['location']['name']
+							) {
+								$newResult['location'] = $items[$i]['node']['location']['name'];
+							}
+
+							if(
+								@ $items[$i]['node']['edge_sidecar_to_children'] &&
+								@ $items[$i]['node']['edge_sidecar_to_children']['edges'] &&
+								@ $items[$i]['node']['edge_sidecar_to_children']['edges'][0]
+							) {
+								$carousel = array();
+								$carouselNodes = $items[$i]['node']['edge_sidecar_to_children']['edges'];
+								for($k = 0; $k < count($carouselNodes); $k++) { $carousel[] = $carouselNodes[$k]['node']['display_url']; }
+								$newResult['carousel'] = $carousel;
+							}
+
 							if($base64images) $newResult['image'] = base64_encode(file_get_contents(@  $items[$i]['node']['display_url']));
 
-							$temp[] = $newResult;
+							if(
+								@ $items[$i]['node']['is_video'] &&
+								@ $items[$i]['node']['video_url']
+							) {
+								$newResult['videoUrl'] = $items[$i]['node']['video_url'];
+								$newResult['videoViewCount'] = $items[$i]['node']['video_view_count'];
+
+								if($base64videos) $newResult['video'] = base64_encode(file_get_contents(@  $items[$i]['node']['video_url']));
+
+							}
+
+							if($imageUrl) $temp[] = $newResult;
 							
 						}
 						
@@ -285,6 +323,155 @@ class Fetch {
 		return file_get_contents($file);
 
 	}
+
+	public static function fetchByTag($array) {
+
+		@ $base64images = $array['base64images'] ? $array['base64images'] : false;
+		@ $base64videos = $array['base64videos'] ? $array['base64videos'] : false;
+
+		@ $group = $array['group'] ? $array['group'] : false;
+		if(!$group || $group != 'recent' && $group != 'top') $group = 'recent';
+		@ $maxImages = $array['maxImages'] && is_numeric($array['maxImages']) && $array['maxImages'] <= 12 ? $array['maxImages'] : false;
+		@ $header = $array['header'] ? $array['header'] : false;
+		@ $file = $array['file'] ? $array['file'] : 'instagram-cache.json';
+		@ $time = isset($array['time']) ? $array['time'] : 3600;
+		@ $prettyfy = ($array['pretty']) ? JSON_PRETTY_PRINT : false;
+		@ $instagramId = $array['id'];
+		
+		if(
+			!isset($file) ||
+			!is_readable($file) ||
+			(filemtime($file) < (time() - $time))
+		) {
+
+			if(!isset($instagramId) || $instagramId == '') { $instagramId = 'love'; }
+
+			$instagramUrl = 'https://www.instagram.com/api/v1/tags/web_info/?tag_name=' . $instagramId;
+
+			$content = self::magicCurl($instagramUrl, $header);
+
+			if($content) {
+
+				$json = json_decode($content, TRUE);
+
+				if(
+					$json &&
+					$json['data'] &&
+					$json['data'][$group] &&
+					$json['data'][$group]['sections']
+				) {
+				
+					$sections = $json['data'][$group]['sections'];
+					
+					if(
+						$sections &&
+						count($sections)
+					) {
+
+						$temp = array();
+						$counter = 0;
+
+						for($i = 0; $i < count($sections); $i++) {
+
+							$medias = $sections[$i]['layout_content']['medias'];
+
+							for($j = 0; $j < count($medias); $j++) {
+
+								if($counter < $maxImages) {
+
+									$media = $medias[$j]['media'];
+
+									$imageUrl = false;
+									if(
+										@ $media['image_versions2'] &&
+										@ $media['image_versions2']['candidates'] &&
+										@ $media['image_versions2']['candidates'][0] &&
+										@ $media['image_versions2']['candidates'][0]['url']
+									) {
+										$imageUrl = $media['image_versions2']['candidates'][0]['url'];
+									}
+
+									$carousel = array();
+									if(
+										@ $media['carousel_media'] &&
+										@ $media['carousel_media'][0] &&
+										@ $media['carousel_media'][0]['image_versions2'] &&
+										@ $media['carousel_media'][0]['image_versions2']['candidates'] &&
+										@ $media['carousel_media'][0]['image_versions2']['candidates'][0] &&
+										@ $media['carousel_media'][0]['image_versions2']['candidates'][0]['url']
+									) {
+										$imageUrl = $media['carousel_media'][0]['image_versions2']['candidates'][0]['url'];
+
+										for($x = 0; $x < count($media['carousel_media']); $x++) {
+											$carousel[] = $media['carousel_media'][$x]['image_versions2']['candidates'][0]['url'];
+										}
+
+									}
+
+									$newResult = array(
+										'id' => @ $media['id'],
+										'time' => @ $media['taken_at'],
+										'imageUrl' => @ $imageUrl,
+										'link' => @ 'https://www.instagram.com/p/' . $media['code'] . '/',
+										'text' => @ $media['caption']['text'],
+									);
+
+									if(
+										@ $media['location'] &&
+										@ $media['location']['name']
+									) {
+										$newResult['location'] = $media['location']['name'];
+									}
+
+									if(count($carousel)) $newResult['carousel'] = $carousel;
+		
+									if($base64images) $newResult['image'] = base64_encode(file_get_contents(@ $imageUrl));
+		
+									if(
+										@ $media['video_versions'] &&
+										@ $media['video_versions'][0] &&
+										@ $media['video_versions'][0]['url']
+									) {
+										$newResult['videoUrl'] = $media['video_versions'][0]['url'];
+										if($base64videos) $newResult['video'] = base64_encode(file_get_contents($media['video_versions'][0]['url']));
+									}
+
+									if($imageUrl) $temp[] = $newResult;
+
+									$counter++;
+
+								}
+
+
+							}
+							
+						}
+						
+						if(
+							$temp &&
+							count($temp)
+						) {
+						
+							$temp = json_encode($temp, $prettyfy);
+							
+							$fp = fopen($file, 'w');
+							fwrite($fp, $temp);
+							fclose($fp);
+						
+						}
+					
+					}
+					
+				}
+
+			}
+
+		}
+		
+		return file_get_contents($file);
+
+	}
+
 }
 
 ?>
