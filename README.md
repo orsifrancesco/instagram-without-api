@@ -2,7 +2,7 @@
   <img src="https://user-images.githubusercontent.com/6490641/182688224-3730f63d-0428-49d6-a909-5a31fc3a38b9.png" width="128" height="128" alt="instagram-without-api" />
 </p>
 <h2 align="center">Instagram Without APIs</h2>
-<h3 align="center">Instagram Scraping <b>(@users and #tags)</b> in April 2023, no credentials required</h3>
+<h3 align="center">Instagram Scraping <strong>(@users and #tags)</strong> in April 2023, no credentials required</h3>
 
 <br/>
 
@@ -181,45 +181,7 @@ echo Fetch::fetchById([
 ```
 
 ## 🕹️ JSON outputs
-output example for `Fetch::fetchByTag`
-```json
-[
- {
-    "id": "3056995843878120981",
-    "time": 1678642360,
-    "imageUrl": "https://scontent.cdninstagram.com/v/t51.2885-15/335624371_158386035875...",
-    "likes": 11063,
-    "comments": 87,
-    "link": "https://www.instagram.com/p/CpsoYX6M24V/",
-    "text": "#ad oh hi, just your...om",
-    "videoUrl": "https://scontent.cdninstagram.com/v/t50.2886-16/335573547_655944973077...",
-    "videoViewCount": 126891
-  },
-  {
-    "id": "2968084867929508835",
-    "time": 1668043310,
-    "imageUrl": "https://scontent.cdninstagram.com/v/t51.2885-15/314902884_370847155226...",
-    "likes": 27989,
-    "comments": 170,
-    "link": "https://www.instagram.com/p/CkwwXY4Jovj/",
-    "text": "Went to the Grand Canyon. Judging from my..",
-    "location": "Grand Canyon",
-    "carousel": [
-      {
-        "imageUrl": "https://scontent.cdninstagram.com/v/t51.2885-15/31421884_370847155226583_8126....",
-        "image": "/9j/4AAQSsasaagh467AQAAAQABAAD/7QB8UGhvdGQAAAAAAGA............."
-      },
-      {
-        "imageUrl": "https://scontent.cdninstagram.com/v/t51.2885-15/312863_678631710324...",
-        "image": "/9j/4AAQSkZJRgABAQAAAQ432wIDMuMAA4QklNBAQAAAAAAGA............."
-      }
-    ]
-  }
-]
-```
-
-
-output example for `Fetch::fetch` on https://github.com/orsifrancesco/instagram-without-api/blob/master/instagram-cache.json
+output example for `Fetch::fetchByTag` or `Fetch::fetch` on https://github.com/orsifrancesco/instagram-without-api/blob/master/instagram-cache.json
 ```json
 [
   {
