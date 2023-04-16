@@ -87,7 +87,7 @@ $xIgAppId = '9366197...';                       // <!-- required!! please get yo
 
 // get the latest 12 feeds from a tag (example https://instagram.com/explore/tags/love)
 
-$fetchByTag = Fetch::fetchByTag([
+echo Fetch::fetchByTag([
 
   "group" => 'recent',                      // <!-- "recent" images or "top" images; "recent" is by default 
   "base64images" => true,                   // <!-- optional, but without you will be not able to save images.. it increases the size of the json file
