@@ -202,6 +202,7 @@ class Fetch {
     public static function fetch($array) {
 
 		@ $base64images = $array['base64images'] ? $array['base64images'] : false;
+		@ $base64imagesCarousel = $array['base64imagesCarousel'] ? $array['base64imagesCarousel'] : false;
 		@ $base64videos = $array['base64videos'] ? $array['base64videos'] : false;
 
 		@ $maxImages = $array['maxImages'] && is_numeric($array['maxImages']) && $array['maxImages'] <= 12 ? $array['maxImages'] : false;
@@ -219,7 +220,6 @@ class Fetch {
 
 			if(!isset($instagramId) || $instagramId == '') { $instagramId = 'orsifrancesco'; }
 
-//			$instagramUrl = 'https://i.instagram.com/api/v1/users/web_profile_info/?username=' . $instagramId;
 			$instagramUrl = 'https://www.instagram.com/api/v1/users/web_profile_info/?username=' . $instagramId;
 
 			$content = self::magicCurl($instagramUrl, $header);
@@ -278,7 +278,11 @@ class Fetch {
 							) {
 								$carousel = array();
 								$carouselNodes = $items[$i]['node']['edge_sidecar_to_children']['edges'];
-								for($k = 0; $k < count($carouselNodes); $k++) { $carousel[] = $carouselNodes[$k]['node']['display_url']; }
+								for($k = 0; $k < count($carouselNodes); $k++) {
+									$newItem = array('imageUrl' => $carouselNodes[$k]['node']['display_url']);
+									if($base64imagesCarousel) $newItem['image'] = base64_encode(file_get_contents(@  $carouselNodes[$k]['node']['display_url']));
+									$carousel[] = $newItem;
+								}
 								$newResult['carousel'] = $carousel;
 							}
 
@@ -327,6 +331,7 @@ class Fetch {
 	public static function fetchByTag($array) {
 
 		@ $base64images = $array['base64images'] ? $array['base64images'] : false;
+		@ $base64imagesCarousel = $array['base64imagesCarousel'] ? $array['base64imagesCarousel'] : false;
 		@ $base64videos = $array['base64videos'] ? $array['base64videos'] : false;
 
 		@ $group = $array['group'] ? $array['group'] : false;
@@ -400,10 +405,15 @@ class Fetch {
 										@ $media['carousel_media'][0]['image_versions2']['candidates'][0] &&
 										@ $media['carousel_media'][0]['image_versions2']['candidates'][0]['url']
 									) {
+										
 										$imageUrl = $media['carousel_media'][0]['image_versions2']['candidates'][0]['url'];
 
 										for($x = 0; $x < count($media['carousel_media']); $x++) {
-											$carousel[] = $media['carousel_media'][$x]['image_versions2']['candidates'][0]['url'];
+											
+											$newItem = array('imageUrl' => $media['carousel_media'][$x]['image_versions2']['candidates'][0]['url']);
+											if($base64imagesCarousel) $newItem['image'] = base64_encode(file_get_contents(@  $media['carousel_media'][$x]['image_versions2']['candidates'][0]['url']));
+											$carousel[] = $newItem;
+										
 										}
 
 									}

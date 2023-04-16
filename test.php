@@ -14,10 +14,11 @@ $xIgAppId = '9366197...';                       // <!-- required!! please get yo
 
 // get the latest 12 feeds from a tag (example https://instagram.com/explore/tags/love)
 
-$fetch = Fetch::fetchByTag([
+$fetchByTag = Fetch::fetchByTag([
 
 	"group" => 'recent',						// <!-- "recent" images or "top" images; "recent" is by default 
 	"base64images" => true,						// <!-- optional, but without you will be not able to save images.. it increases the size of the json file
+	"base64imagesCarousel" => false,			// <!-- optional but not recommended, it increases the size of the json file
 	"base64videos" => false,					// <!-- optional but not recommended, it increases the size of the json file
 
 	"header" =>                                   
@@ -27,7 +28,7 @@ $fetch = Fetch::fetchByTag([
 		'',
 
 	"maxImages" => 4,							// <!-- optional, 12 is the max number
-	"file" => "instagram-cache.json",			// <!-- optional, instagram-cache.json is by default
+	"file" => "instagram-cache-bytag.json",		// <!-- optional, instagram-cache.json is by default
 	"time" => 3600,								// <!-- optional, reload contents after 3600 seconds by default
 	"pretty" => true,							// <!-- optional, prettyfy json true/false
 	"id" => "love",								// <!-- id is required
@@ -41,6 +42,7 @@ $fetch = Fetch::fetchByTag([
 $fetch = Fetch::fetch([
 
 	"base64images" => true,						// <!-- optional, but without you will be not able to save images.. it increases the size of the json file
+	"base64imagesCarousel" => false,			// <!-- optional but not recommended, it increases the size of the json file
 	"base64videos" => false,					// <!-- optional but not recommended, it increases the size of the json file
 
 	"header" =>                                   
@@ -106,6 +108,7 @@ $fetchById = Fetch::fetchById([
 
 echo json_encode(
 	array(
+		'fetchByTag' => json_decode($fetchByTag),
 		'fetch' => json_decode($fetch),
 		'fetchByIdUrl' => json_decode($fetchByIdUrl),
 		'fetchById' => json_decode($fetchById)

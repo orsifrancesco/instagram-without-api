@@ -2,21 +2,21 @@
   <img src="https://user-images.githubusercontent.com/6490641/182688224-3730f63d-0428-49d6-a909-5a31fc3a38b9.png" width="128" height="128" alt="instagram-without-api" />
 </p>
 <h2 align="center">Instagram Without APIs</h2>
-<h3 align="center">Instagram Scraping (@users and #tags) in April 2023, no credentials required</h3>
+<h3 align="center">Instagram Scraping <b>(@users and #tags)</b> in April 2023, no credentials required</h3>
 
 <br/>
 
 This is a PHP library, are you looking for the same in Node.js? go to https://orsi.me/instagram-without-api/.
 
-A simple PHP code to get **unlimited instagram public pictures** by **every user** without api, **without credentials** (just token from cookies), just Instagram Scraping in 2022 (with cookie and image data in base64).
+A simple PHP code to get **unlimited instagram public pictures** by **every user** without api, **without credentials** (just token from cookies), just Instagram Scraping in 2023 (with cookie and image data in base64).
 
 You can get the latest pictures/information from an account or a single picture/information by id.
 
-### [🛕 Cool Project Example](https://orsi.me/sniffagram)
+### [🛕 Cool Project Example](https://orsi.me/sniffagram) <a href="https://orsi.me/sniffagram" rel="sniffagram"><img style="vertical-align: middle" alt="sniffagram" width="100" src="https://user-images.githubusercontent.com/6490641/232155875-ce2ea2ec-eeb5-4bcc-9af7-8c8d82887420.svg" /></a>
 ### [🎮 Demo / Example](https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html)
 ### ⚖️ Licensed under MIT
 ### 🤓 Author [@orsifrancesco](https://twitter.com/orsifrancesco)
-### ☕ [Coffees are welcome](https://www.paypal.com/donate/?business=5EL4L2LDYVH96) <small>(in particular if you plan to contact me)</small>
+### ☕ [Coffees are welcome](https://www.paypal.com/donate/?business=5EL4L2LDYVH96) <small>(in particular if you appreciate the project or you plan to contact me)</small>
 <!--### ☕ [Offer me a coffee](https://paypal.me/orsifrancesco)-->
 
 <hr/>
@@ -67,7 +67,7 @@ You can easily show the image data on your project with the following snippets o
 Check https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html for Base64 example.
 
 ## 🛕 Cool Project Example
-<a href="https://orsi.me/sniffagram" rel="sniffagram">![sniffagram](https://user-images.githubusercontent.com/6490641/232155875-ce2ea2ec-eeb5-4bcc-9af7-8c8d82887420.svg "sniffagram logo")</a>
+<a href="https://orsi.me/sniffagram" rel="sniffagram">![sniffagram](https://user-images.githubusercontent.com/6490641/232155875-ce2ea2ec-eeb5-4bcc-9af7-8c8d82887420.svg "sniffagram")</a>
 
 ## 🎮 Demo / Example
 example on https://github.com/orsifrancesco/instagram-without-api/blob/master/test.php
@@ -87,10 +87,11 @@ $xIgAppId = '9366197...';                       // <!-- required!! please get yo
 
 // get the latest 12 feeds from a tag (example https://instagram.com/explore/tags/love)
 
-$fetch = Fetch::fetchByTag([
+$fetchByTag = Fetch::fetchByTag([
 
   "group" => 'recent',                      // <!-- "recent" images or "top" images; "recent" is by default 
   "base64images" => true,                   // <!-- optional, but without you will be not able to save images.. it increases the size of the json file
+  "base64imagesCarousel" => false,          // <!-- optional but not recommended, it increases the size of the json file
   "base64videos" => false,                  // <!-- optional but not recommended, it increases the size of the json file
 
   "header" =>                                   
@@ -100,7 +101,7 @@ $fetch = Fetch::fetchByTag([
     '',
 
   "maxImages" => 4,                         // <!-- optional, 12 is the max number
-  "file" => "instagram-cache.json",         // <!-- optional, instagram-cache.json is by default
+  "file" => "instagram-cache-bytag.json",   // <!-- optional, instagram-cache.json is by default
   "time" => 3600,                           // <!-- optional, reload contents after 3600 seconds by default
   "pretty" => true,                         // <!-- optional, prettyfy json true/false
 
@@ -115,6 +116,7 @@ $fetch = Fetch::fetchByTag([
 echo Fetch::fetch([
 
   "base64images" => true,                   // <!-- optional, but without you will be not able to save images.. it increases the size of the json file
+  "base64imagesCarousel" => false,          // <!-- optional but not recommended, it increases the size of the json file
   "base64videos" => false,                  // <!-- optional but not recommended, it increases the size of the json file
 
   "header" =>                                   
@@ -194,18 +196,24 @@ output example for `Fetch::fetchByTag`
     "videoViewCount": 126891
   },
   {
-      "id": "2968084867929508835",
-      "time": 1668043310,
-      "imageUrl": "https://scontent.cdninstagram.com/v/t51.2885-15/314902884_370847155226...",
-      "likes": 27989,
-      "comments": 170,
-      "link": "https://www.instagram.com/p/CkwwXY4Jovj/",
-      "text": "Went to the Grand Canyon. Judging from my..",
-      "location": "Grand Canyon",
-      "carousel": [
-          "https://scontent.cdninstagram.com/v/t51.2885-15/314902884_..",
-          "https://scontent.cdninstagram.com/v/t51.2885-15/314674373_678631710324..."
-      ]
+    "id": "2968084867929508835",
+    "time": 1668043310,
+    "imageUrl": "https://scontent.cdninstagram.com/v/t51.2885-15/314902884_370847155226...",
+    "likes": 27989,
+    "comments": 170,
+    "link": "https://www.instagram.com/p/CkwwXY4Jovj/",
+    "text": "Went to the Grand Canyon. Judging from my..",
+    "location": "Grand Canyon",
+    "carousel": [
+      {
+        "imageUrl": "https://scontent.cdninstagram.com/v/t51.2885-15/31421884_370847155226583_8126....",
+        "image": "/9j/4AAQSsasaagh467AQAAAQABAAD/7QB8UGhvdGQAAAAAAGA............."
+      },
+      {
+        "imageUrl": "https://scontent.cdninstagram.com/v/t51.2885-15/312863_678631710324...",
+        "image": "/9j/4AAQSkZJRgABAQAAAQ432wIDMuMAA4QklNBAQAAAAAAGA............."
+      }
+    ]
   }
 ]
 ```
@@ -225,8 +233,14 @@ output example for `Fetch::fetch` on https://github.com/orsifrancesco/instagram-
     "image": "/9j/4AAQSkZJRgABAQAAAQABAAD/7QB8UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAGA.............",
     "location": "Liverpool Cathedral",
     "carousel": [
-        "https://scontent.cdninstagram.com/v/t51.2885-15/314902884_370847155226583_8126....",
-        "https://scontent.cdninstagram.com/v/t51.2885-15/314674373_678631710324..."
+      {
+        "imageUrl": "https://scontent.cdninstagram.com/v/t51.2885-15/314902884_370847155226583_8126....",
+        "image": "/9j/4AAQSsasaakZJRgABAQAAAQABAAD/7QB8UGhvdGQAAAAAAGA............."
+      },
+      {
+        "imageUrl": "https://scontent.cdninstagram.com/v/t51.2885-15/314674373_678631710324...",
+        "image": "/9j/4AAQSkZJRgABAQAAAQdG9zaG9wIDMuMAA4QklNBAQAAAAAAGA............."
+      }
     ]
   },
   {
@@ -288,4 +302,4 @@ Licensed under MIT
 
 ## ☕ About
 
-Any feedback to [@orsifrancesco](https://twitter.com/orsifrancesco) and [coffee](https://www.paypal.com/donate/?business=5EL4L2LDYVH96) are welcome :) 
+Any feedback to [@orsifrancesco](https://twitter.com/orsifrancesco) and [coffees](https://www.paypal.com/donate/?business=5EL4L2LDYVH96) are welcome :) 
