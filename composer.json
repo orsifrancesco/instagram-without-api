@@ -1,5 +1,5 @@
 {
-    "name": "orsif/instagram-without-api",
+    "name": "orsifrancesco/instagram-without-api",
     "description": "A simple PHP code to get unlimited instagram public pictures (users and tags) without api, without credentials (just token from cookies), just Instagram Scraping (with cookie and image data in base64).",
     "keywords": [
         "instagram",
