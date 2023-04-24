@@ -1,21 +1,31 @@
 {
     "name": "orsif/instagram-without-api",
-	"type": "composer-plugin",
-    "license": "MIT",
     "description": "A simple PHP code to get unlimited instagram public pictures (users and tags) without api, without credentials (just token from cookies), just Instagram Scraping (with cookie and image data in base64).",
+    "keywords": [
+        "instagram",
+        "api"
+    ],
+    "homepage": "https://github.com/orsifrancesco/instagram-without-api",
+    "license": "MIT",
     "authors": [
         {
             "name": "Francesco Orsi",
-            "email": "hello@orsi.me"
+            "homepage": "https://orsi.me"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.6.0",
+        "ext-curl": "*",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-0": {
             "InstagramWithoutApi": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
         }
     }
 }
