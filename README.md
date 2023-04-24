@@ -21,7 +21,13 @@ You can get the latest pictures/information from an account or a single picture/
 
 <hr/>
 
-## 📦 Installation
+## 📦 Installation from Composer Repository
+
+```bash
+composer require orsifrancesco/instagram-without-api
+```
+
+## 📦 Installation from this Repository
 
 ```bash
 composer install
