@@ -2,7 +2,7 @@
 
 // require_once __DIR__ . '/vendor/autoload.php';	// Autoload files using Composer autoload
 
-include 'src/InstagramWithoutApi/Fetch.php';
+include 'src/InstagramWithoutApi.php';
 
 use InstagramWithoutApi\Fetch;
 
@@ -17,7 +17,7 @@ $xIgAppId = '9366197...';                       // <!-- required!! please get yo
 $fetchByTag = Fetch::fetchByTag([
 
 	"group" => 'recent',						// <!-- "recent" images or "top" images; "recent" is by default 
-	"base64images" => true,						// <!-- optional, but without you will be not able to save images.. it increases the size of the json file
+	"base64images" => false,						// <!-- optional, but without you will be not able to save images.. it increases the size of the json file
 	"base64imagesCarousel" => false,			// <!-- optional but not recommended, it increases the size of the json file
 	"base64videos" => false,					// <!-- optional but not recommended, it increases the size of the json file
 
@@ -41,7 +41,7 @@ $fetchByTag = Fetch::fetchByTag([
 
 $fetch = Fetch::fetch([
 
-	"base64images" => true,						// <!-- optional, but without you will be not able to save images.. it increases the size of the json file
+	"base64images" => false,						// <!-- optional, but without you will be not able to save images.. it increases the size of the json file
 	"base64imagesCarousel" => false,			// <!-- optional but not recommended, it increases the size of the json file
 	"base64videos" => false,					// <!-- optional but not recommended, it increases the size of the json file
 
