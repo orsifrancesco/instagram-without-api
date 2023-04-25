@@ -12,6 +12,7 @@ A simple PHP code to get **unlimited instagram public pictures** by **every user
 
 You can get the latest pictures/information from an account or a single picture/information by id.
 
+### [📦 Packagist link](https://packagist.org/packages/orsifrancesco/instagram-without-api)
 ### [🛕 Cool Project Example](https://orsi.me/sniffagram) <a href="https://orsi.me/sniffagram" rel="sniffagram"><img style="vertical-align: middle" alt="sniffagram" width="100" src="https://user-images.githubusercontent.com/6490641/232155875-ce2ea2ec-eeb5-4bcc-9af7-8c8d82887420.svg" /></a>
 ### [🎮 Demo / Example](https://orsifrancesco.github.io/instagram-without-api/how-to-show-base64-images.html)
 ### ⚖️ Licensed under MIT
@@ -21,7 +22,7 @@ You can get the latest pictures/information from an account or a single picture/
 
 <hr/>
 
-## 📦 Installation from Composer Repository
+## 📦 Installation from [Composer Repository](https://packagist.org/packages/orsifrancesco/instagram-without-api)
 
 ```bash
 composer require orsifrancesco/instagram-without-api
